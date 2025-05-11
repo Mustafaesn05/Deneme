@@ -808,5 +808,5 @@ def handle_theme_change(data: dict) -> None:
 
 
 if __name__ == '__main__':
-    print("\nServer started on http://0.0.0.0:11481")
-    socketio.run(app, host='0.0.0.0', port=11481, allow_unsafe_werkzeug=True, use_reloader=True, log_output=True)
+    print("\nServer started on http://0.0.0.0:5000")
+    socketio.run(app, host='0.0.0.0', port=5000, allow_unsafe_werkzeug=True, use_reloader=True, log_output=True)
