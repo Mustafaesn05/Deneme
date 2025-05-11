@@ -13,7 +13,7 @@ HTML = '''
 <!DOCTYPE html>
 <html>
 <head>
-    <title>❤️ Sadece Biz ❤️</title>
+    <title>Tuana Özür Dilerim</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
     <script src="https://www.youtube.com/iframe_api"></script>
     <style>
@@ -33,7 +33,7 @@ HTML = '''
             font-family: Arial, sans-serif;
         }
         .watermark {
-            content: " MISTAVA 💘 EZGI ";
+            content: " TUANA ÖZÜR DİLERİM ";
             position: fixed;
             bottom: 0;
             left: 0;
@@ -294,20 +294,7 @@ HTML = '''
 <body>
     <div id="roomSetup">
         <div class="room-container">
-            <h2>❤️ Sadece Biz ❤️</h2>
-            <div class="theme-menu" style="position: absolute; top: 10px; left: 10px;" id="themeMenu">
-                <div class="theme-dots" onclick="toggleThemeSelector()" style="cursor: pointer; font-size: 24px;">⚙️</div>
-                <div class="theme-selector" style="display: none; position: absolute; background: var(--bg-color); border: 1px solid var(--primary-color); padding: 10px; border-radius: 5px; z-index: 100; min-width: 200px;">
-                    <div style="text-align: center; margin-bottom: 10px; font-weight: bold;">Profil Ayarları</div>
-                    <div style="margin-bottom: 15px;">
-                        <div style="text-align: center; margin-bottom: 10px;">
-                            <img id="profileAvatar" src="https://www.gravatar.com/avatar/?d=mp" style="width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--primary-color);">
-                        </div>
-                        <input type="file" id="avatarFile" accept="image/*" style="width: 100%; padding: 5px; margin-bottom: 5px; background: var(--bg-color); color: var(--text-color); border: 1px solid var(--primary-color);">
-                        <button onclick="updateAvatar()" style="width: 100%; margin-bottom: 10px;">Profil Fotoğrafını Güncelle</button>
-                    </div>
-                </div>
-            </div>
+            <h2>Tuana Özür Dilerim</h2>
             <div class="room-option">
                 <h3>Yeni Oda Oluştur</h3>
                 <input type="text" id="createUsername" placeholder="Kullanıcı Adı">
@@ -322,7 +309,7 @@ HTML = '''
         </div>
     </div>
 
-    <div class="watermark">💝 MISTABA 💘 EZGI 💝</div>
+    <div class="watermark">Tuana Özür Dilerim</div>
     <div id="musicRoom">
         <div class="main-content">
             <h2 id="roomIdDisplay" style="display: none;">Oda: <span id="currentRoomId"></span></h2>
@@ -340,16 +327,6 @@ HTML = '''
                 <div class="theme-dots" onclick="toggleThemeSelector()" style="cursor: pointer; font-size: 24px;">⚙️</div>
                 <div class="theme-selector" style="display: none; position: absolute; background: var(--bg-color); border: 1px solid var(--primary-color); padding: 10px; border-radius: 5px; z-index: 100; min-width: 200px;">
                     <div style="text-align: center; margin-bottom: 10px; font-weight: bold;">Ayarlar</div>
-
-                    <h3 style="margin-top: 0;">Profil Ayarları</h3>
-                    <div style="margin-bottom: 15px;">
-                        <div style="text-align: center; margin-bottom: 10px;">
-                            <img id="profileAvatar" src="https://www.gravatar.com/avatar/?d=mp" style="width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--primary-color);">
-                        </div>
-                        <input type="file" id="avatarFile" accept="image/*" style="width: 100%; padding: 5px; margin-bottom: 5px; background: var(--bg-color); color: var(--text-color); border: 1px solid var(--primary-color);">
-                        <button onclick="updateAvatar()" style="width: 100%; margin-bottom: 10px;">Profil Fotoğrafını Güncelle</button>
-                    </div>
-
                     <h3 style="margin-top: 0;">Tema Seç</h3>
                     <select id="themeSelect" onchange="setTheme(this.value)" style="width: 100%; padding: 5px; margin-bottom: 10px; background: var(--bg-color); color: var(--text-color); border: 1px solid var(--primary-color);">
                         <option value="default">Varsayılan</option>
@@ -399,7 +376,7 @@ HTML = '''
                 '--primary-color': '#ff69b4',
                 '--bg-color': '#ffe4e1',
                 '--text-color': '#ff1493',
-                'watermark': 'EZGI 💗 MISTAVA',
+                'watermark': 'Sadece Biz 💗',
                 'title': '💕 Aşkımızın Şarkıları 💕',
                 '--message-bg': 'rgba(255,105,180,0.3)',
                 '--message-text': '#ff1493',
@@ -621,34 +598,8 @@ HTML = '''
 
         function addMessage(username, message) {
             const messages = document.getElementById('messages');
-            const avatar = localStorage.getItem(`avatar_${username}`) || 'https://www.gravatar.com/avatar/?d=mp';
-            messages.innerHTML += `
-                <div class="message">
-                    <img src="${avatar}" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;">
-                    <div>
-                        <strong>${username}:</strong> ${message}
-                    </div>
-                </div>`;
+            messages.innerHTML += `<div class="message"><strong>${username}:</strong> ${message}</div>`;
             messages.scrollTop = messages.scrollHeight;
-        }
-
-        function updateAvatar() {
-            const avatarFile = document.getElementById('avatarFile').files[0];
-            const username = document.getElementById('username').value || document.getElementById('createUsername').value;
-            if (avatarFile) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    document.getElementById('profileAvatar').src = e.target.result;
-                    localStorage.setItem(`avatar_${username}`, e.target.result);
-                    // Send avatar data to server (you'll need to handle this on the server-side)
-                    socket.emit('avatar_update', {
-                        room: currentRoom,
-                        username: username,
-                        avatar: e.target.result // Send the base64 encoded image data
-                    });
-                };
-                reader.readAsDataURL(avatarFile);
-            }
         }
 
         function searchVideo() {
@@ -767,13 +718,6 @@ HTML = '''
             alert(data.message);
         });
 
-        socket.on('avatar_update', function(data) {
-            // Update the avatar image on the client-side
-            const avatarImg = document.getElementById('profileAvatar');
-            avatarImg.src = data.avatar;
-        });
-
-
         document.getElementById('messageInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 sendMessage();
@@ -862,11 +806,7 @@ def handle_video_state(data: dict) -> None:
 def handle_theme_change(data: dict) -> None:
     emit('theme_change', data, to=data['room'])
 
-@socketio.on('avatar_update')
-def handle_avatar_update(data: dict) -> None:
-    emit('avatar_update', data, to=data['room'])
-
 
 if __name__ == '__main__':
-    print("\nServer started on http://0.0.0.0:5000")
+    print("\nServer started on http://0.0.0.0:11481")
     socketio.run(app, host='0.0.0.0', port=11481, allow_unsafe_werkzeug=True, use_reloader=True, log_output=True)
